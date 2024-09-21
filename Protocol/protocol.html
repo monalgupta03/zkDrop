@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title> Employee Dashboard </title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <!-- partial:index.partial.html -->
+  <link href="https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap" rel="stylesheet">
+  <div class="task-manager">
+
+    <div class="left-bar">
+      <div class="left-content">
+        <!-- <div class="header">
+          <img class="logo" src="deVy logo.jpg" alt="">
+        </div> -->
+        <div class="top-part">
+          <div class="count">
+            <img src="dpPic.jpg" alt="member-2">
+          </div>
+        </div>
+        <ul class="action-list">
+          <li class="item">
+            <span class="name">Account 1</span>
+          </li>
+          <li class="item">
+            <span class="name"> 0xbaF....rGE</span>
+          </li>
+          <div class="task-box2 blue">
+            <div class="members">
+              <button class="onboard" id="myButton">
+                <img src="metamask-logo.png" alt="member">
+              </button>
+            </div>
+            <div class="description-task">
+
+
+            </div>
+          </div>
+
+        </ul>
+      </div>
+    </div>
+    <div class="page-content">
+      <!-- <div class="header">Users </div> -->
+      <div class="content-categories">
+        <div class="label-wrapper">
+          <input class="nav-item" name="nav" type="radio" id="opt-1">
+          <label class="category" for="opt-1">All</label>
+        </div>
+        <div class="label-wrapper">
+          <input class="nav-item" name="nav" type="radio" id="opt-2" checked>
+          <label class="category" for="opt-2">Approved</label>
+        </div>
+        <div class="label-wrapper">
+          <input class="nav-item" name="nav" type="radio" id="opt-3">
+          <label class="category" for="opt-3">Pending </label>
+        </div>
+        <div class="label-wrapper">
+          <input class="nav-item" name="nav" type="radio" id="opt-4">
+          <label class="category" for="opt-4">Links</label>
+        </div>
+      </div>
+      <div class="tasks-wrapper">
+
+        <div class="header upcoming">
+          <span> Provider</span>
+          <span class="task">Aadhar</span>
+          <span class="task">Github</span>
+          <span class="task">Gmail</span>
+          <span class="task">Razor Pay</span>
+          <span class="task">Uber</span>
+          <span class="task"> <b>Total </b></span>
+        </div>
+
+        <div class="task">
+          <input class="task-item" name="task" id="item-1">
+          <label for="item-1">
+            <span> User 1 </span>
+          </label>
+          <div id="root"></div>
+          <button class="tag waiting" id="QRgen"> Waiting </button>
+          <span class="tag approved">Verified</span>
+          <span class="tag approved">Verified</span>
+          <span class="tag review"> Rejected </span>
+          <span class="tag approved">Verified</span>
+          <span> 4/5 </span>
+        </div>
+        <div class="task">
+          <input class="task-item" name="task" id="item-2">
+          <label for="item-2">
+            <span>User 2 </span>
+          </label>
+          <span class="tag approved">Verified </span>
+          <span class="tag review"> Rejected </span>
+          <span class="tag approved">Verified</span>
+          <span class="tag approved">Verified</span>
+          <span class="tag approved">Verified</span>
+          <span> 4/5 </span>
+        </div>
+        <div class="task">
+          <input class="task-item" name="task" id="item-3">
+          <label for="item-3">
+            <span> User 3</span>
+          </label>
+          <span class="tag approved"> Verified </span>
+          <span class="tag review"> Rejected </span>
+          <span class="tag approved">Verified</span>
+          <span class="tag review"> Rejected </span>
+          <span class="tag approved">Verified</span>
+          <span> 3/5 </span>
+        </div>
+        <div class="task">
+          <input class="task-item" name="task" id="item-4">
+          <label for="item-4">
+            <span> User 4 </span>
+          </label>
+          <span class="tag approved"> Verified </span>
+          <span class="tag approved"> Verified </span>
+          <span class="tag approved"> Verified </span>
+          <span class="tag approved"> Verified </span>
+          <span class="tag approved"> Verified </span>
+          <span> 5/5 </span>
+        </div>
+        <div class="task">
+          <input class="task-item" name="task" id="item-5">
+          <label for="item-5">
+            <span> User 5 </span>
+          </label>
+          <span class="tag approved"> Verified </span>
+          <span class="tag approved"> Verified </span>
+          <span class="tag approved"> Verified </span>
+          <span class="tag review"> Rejected </span>
+          <span class="tag approved"> Verified </span>
+          <span> 4/5 </span>
+        </div>
+        <div class="task">
+          <input class="task-item" name="task" id="item-6">
+          <label for="item-6">
+            <span> User 6 </span>
+          </label>
+          <span class="tag approved"> Verified </span>
+          <span class="tag approved"> Verified </span>
+          <span class="tag approved"> Verified </span>
+          <span class="tag review"> Rejected </span>
+          <span class="tag review">Rejected </span>
+          <span> 3/5 </span>
+        </div>
+        <!-- <div class="header upcoming2">Education </div>
+        <div class="task">
+          <input class="task-item" name="task" id="item-7">
+          <label for="item-7">
+            <span class="label-text">Indian Institute of Technology, Delhi </span>
+          </label>
+          <span class="tag approved">Approved</span>
+        </div>
+        <div class="task">
+          <input class="task-item" name="task" id="item-8">
+          <label for="item-8">
+            <span class="label-text">Aligarh Muslim University </span>
+          </label>
+          <span class="tag approved">Approved</span>
+        </div>
+        <div class="task">
+          <input class="task-item" name="task" id="item-9">
+          <label for="item-9">
+            <span> User a Sr. Sec. School</span>
+          </label>
+          <span class="tag waiting">Waiting</span>
+        </div>
+
+        <div class="header upcoming2">Courses </div>
+        <div class="task">
+          <input class="task-item" name="task" id="item-10" checked>
+          <label for="item-10">
+            <span> User nd Algorithms </span>
+          </label>
+          <span class="tag approved">Approved</span>
+        </div>
+        <div class="task">
+          <input class="task-item" name="task" id="item-11" checked>
+          <label for="item-11">
+            <span> User ain </span>
+          </label>
+          <span class="tag approved"> Approved </span>
+        </div>
+        <div class="task">
+          <input class="task-item" name="task" id="item-12">
+          <label for="item-12">
+            <span> User ution Specialization </span>
+          </label>
+          <span class="tag review">Rejected</span>
+        </div>
+        <div class="task">
+          <input class="task-item" name="task" id="item-13">
+          <label for="item-13">
+            <span> User ography foundations</span>
+          </label>
+          <span class="tag waiting">Waiting</span>
+        </div> -->
+
+      </div>
+    </div>
+    <div class="right-bar">
+      <!-- <div class="header"> Job Opportunities </div> -->
+      <div class="right-content">
+        <div class="header upcoming"> Settings </div>
+        <div class="task-box yellow">
+          <div class="description-task">
+            <div class="task-name">Setting 1</div>
+            <div class="time">xxx</div>
+            <div class="time">xxxxxxxxxxxxxxxx </div>
+
+          </div>
+          <div class="more-button"></div>
+        </div>
+        <div class="task-box blue">
+          <div class="description-task">
+            <div class="task-name">Setting 2 </div>
+            <div class="time">xxx</div>
+            <div class="time">xxxxxxxxxxxxxxxx </div>
+          </div>
+          <div class="more-button"></div>
+        </div>
+        <div class="task-box red">
+          <div class="description-task">
+            <div class="task-name"> Setting 3</div>
+            <div class="time">xxx</div>
+            <div class="time">xxxxxxxxxxxxxxxx</div>
+          </div>
+          <div class="more-button"></div>
+        </div>
+        <div class="header upcoming2"> Previous Airdrops </div>
+        <div class="task-box green">
+          <div class="more-button"></div>
+          <div class="description-task">
+            <div class="task-name">Task A</div>
+            <div class="time">19 Sep 2024 </div>
+            <div class="time"><u>Wallet Address</u></div>
+          </div>
+        </div>
+        <div class="task-box blue">
+
+          <div class="more-button"></div>
+          <!-- <div class="members">
+            <img
+              src="https://images.unsplash.com/photo-1521122872341-065792fb2fa0?ixlib=rb-1.2.1&auto=format&fit=crop&w=2208&q=80"
+              alt="member-3">
+          </div> -->
+          <div class="description-task">
+            <div class="task-name">Task B</div>
+            <div class="time"> 7 Sep 2024 </div>
+            <div class="time"><u>Wallet Address</u></div>
+          </div>
+        </div>
+        <div class="task-box yellow">
+
+          <div class="more-button"></div>
+          <div class="members">
+            <div class="description-task">
+              <div class="task-name">Task C </div>
+              <div class="time"> 25 Aug 2024</div>
+              <div class="time"><u>Wallet Address</u></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script src="script.js"></script>
+    <script type="module" src="displayQR.js">  </script>
+
+</body>
+
+</html>
