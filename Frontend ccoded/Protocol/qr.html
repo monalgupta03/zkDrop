@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+</head>
+<body>
+    <div class="user-dashboard">
+        <h2>User Dashboard</h2>
+        <p>Wallet Address: <span id="walletAddress"></span></p>
+        <button id="generateQRButton">Generate QR Code</button>
+        <div id="qrCodeContainer" style="display: none;">
+            <h3>Scan QR Code to generate proof:</h3>
+            <div id="qrCode"></div>
+        </div>
+        <p id="proofStatus"></p>
+    </div>
+        <script src="displayQR.js"></script>
+</body>
+</html>

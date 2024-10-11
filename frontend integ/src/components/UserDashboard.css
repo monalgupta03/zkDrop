@@ -1,0 +1,79 @@
+:root {
+    --primary-blue: #3498db;
+    --secondary-blue: #2980b9;
+    --primary-green: #2ecc71;
+    --secondary-green: #27ae60;
+    --white: #ffffff;
+    --light-gray: #f4f4f4;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: var(--light-gray);
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h1 {
+    color: var(--primary-blue);
+    text-align: center;
+  }
+  
+  .wallet-section {
+    background-color: var(--white);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  button {
+    background-color: var(--primary-green);
+    color: var(--white);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: var(--secondary-green);
+  }
+  
+  .address-display {
+    background-color: var(--secondary-blue);
+    color: var(--white);
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+  
+  .address-display p {
+    margin: 0;
+    font-size: 14px;
+  }
+  
+  .address-display span {
+    font-weight: bold;
+    word-break: break-all;
+  }
+  
+  .qr-section {
+    background-color: var(--white);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .qr-code {
+    margin-top: 20px;
+  }
