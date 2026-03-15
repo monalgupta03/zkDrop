@@ -1,65 +1,114 @@
-# Zk-Market
+# zkDrop
 
-*  **Zk-Market** is a groundbreaking marketplace that bridges the gap between Web2 and Web3 ecosystems through the innovative use of zero-knowledge proofs. At its core, Zk-Market leverages **ZKtls (Zero-Knowledge Transport Layer Security)** to establish secure connections with Web3 networks. Our platform employs a proxy-based ZKtls system, enabling the generation of zero-knowledge proofs for any Web2 data, which can then be verified on any blockchain. By integrating Reclaim Protocol libraries, we facilitate the seamless transfer of Web2 data on-chain, unlocking new possibilities for marketplace interactions.
+**ETHGlobal Singapore 2024 - Winner: Rootstock Best Use**
 
-* The Zk-Market SDK serves as a secure channel for Web3 protocols to engage with both Web2 and Web3 protocols while adhering to customizable business logic. This unique integration allows for novel scenarios that benefit both ecosystems while faciliating the **trustless** service of the blockchain. For instance, Web3 protocols can now expand their user base beyond web3 users by partnering with Web2 platforms. Through this collaboration, Web3 protocols can offer airdrops or other incentives to early adopters from the Web2 world, effectively **bridging** the gap between these two digital realms.
+zkDrop is a dApp that lets Web3 protocols run targeted airdrops to users verified by their Web2 credentials, using zero-knowledge proofs to preserve privacy.
 
-* This strategy not only helps Web3 protocols to acquire and retain a broader user base but also provides value to Web2 platforms by incentivizing their users to engage with blockchain technology. As users from Web2 platforms are rewarded for their participation, they're more likely to remain active on both the Web2 platform and the partnered Web3 protocol. This symbiotic relationship fosters growth for both ecosystems simultaneously, creating a win-win situation that accelerates the adoption of blockchain technology while enhancing the value proposition of existing Web2 services.
+## The Problem
 
+Most airdrops target existing Web3 users. zkDrop solves the cold-start problem: how do you reward someone based on their GitHub contributions, Spotify listening history, or Gmail account, without them revealing that data on-chain and without trusting a centralised server?
 
-# How to use it 
+## How It Works
 
+zkDrop uses **ZkTLS** (via the [Reclaim Protocol](https://reclaimprotocol.org/)) to generate zero-knowledge proofs of Web2 data. The proof is verified and stored on the **Rootstock blockchain**, a Bitcoin sidechain with EVM compatibility.
+```
+User connects MetaMask
+        ↓
+Selects a Web2 provider (GitHub, Gmail, etc.)
+        ↓
+Scans a QR code on their phone
+        ↓
+Reclaim's proxy co-signs the TLS session and generates a ZK proof
+        ↓
+Proof is submitted to ReclaimVerifier smart contract on Rootstock
+        ↓
+Protocol dashboard verifies proof and checks airdrop eligibility
+```
 
-
-
-
-
-
-
-
-
-
-# Structure 
+## Structure 
 ![alt text](image.png)
 
 
+### ZkTLS in plain English
+
+When your browser talks to a website over HTTPS, only you can see the response. ZkTLS routes that connection through a trusted proxy that co-signs the session, allowing a cryptographic proof to be generated that says *"this user received this response from this server"*, without revealing the actual data. That proof can be verified trustlessly by a smart contract.
+
+## Architecture
+```
+frontend integ/          React frontend
+├── src/
+│   ├── App.js           Wallet connection, user/protocol routing
+│   ├── contractConfig.js  ABI + Rootstock RPC config
+│   ├── components/
+│   │   ├── UserDashboard.js      Proof generation + QR code flow
+│   │   └── ProtocolDashboard.js  User verification + eligibility view
+│   └── contracts/       Compiled contract artifacts
+scripts/                 Hardhat deployment scripts
+artifacts/               Compiled contract build output
+```
+
+## Smart Contract: ReclaimVerifier
+
+Deployed on **Rootstock Testnet**. Key functions:
+
+| Function | Description |
+|---|---|
+| `submitProof(providerId, proof)` | User submits ZK proof on-chain |
+| `verifyUser(userId, providerId)` | Protocol verifies a user's proof |
+| `checkAirdropEligibility(userId)` | Returns whether a user is eligible |
+| `getProviders()` | Lists available Web2 credential providers |
+| `getUsers()` | Lists all users who have submitted proofs |
+
+A companion `MyToken` (MTK) ERC20 contract handles the airdrop token.
+
+## Tech Stack
+
+- **Frontend**: React, ethers.js, react-qr-code
+- **ZK Proofs**: [Reclaim Protocol](https://reclaimprotocol.org/) JS SDK (ZkTLS)
+- **Blockchain**: Rootstock (RSK) - EVM-compatible Bitcoin sidechain
+- **Smart Contracts**: Solidity 0.8.20, Hardhat, OpenZeppelin ERC20
+- **Network**: Rootstock Testnet (`https://public-node.testnet.rsk.co`)
+
+## Running Locally
+```bash
+cd "frontend integ"
+npm install
+npm start
+```
+
+You'll need MetaMask configured for the Rootstock Testnet:
+- **RPC URL**: `https://public-node.testnet.rsk.co`
+- **Chain ID**: `31`
+- **Symbol**: `tRBTC`
+
+## Known Limitations (MVP)
+
+1. **App secret exposed on frontend**: signature generation should happen server-side in production. The `generateSignature` call in `UserDashboard.js` is a known MVP shortcut.
+2. **Proof stored as raw JSON**: gas-inefficient. Production would store a hash on-chain and keep the full proof off-chain.
+3. **Airdrop execution not implemented**: the contract tracks eligibility, but token distribution requires a separate claim or distribution function.
+4. **Users require a MetaMask wallet**: the full vision (rewarding walletless Web2 users) would require a pre-funded claim contract redeemable at wallet creation time.
+
+## Use Cases
+
+**Mass adoption via Web2 partnerships**  
+A Web3 protocol partners with a platform like Facebook - users with 500+ followers receive tokens. Both ecosystems benefit: Web3 grows its user base, Web2 increases retention.
+
+**Rewarding open-source contributors**  
+ZkTLS verifies GitHub contribution history without exposing private data. Protocols reward developers based on real, verified work, not self-reported claims.
+
+**Targeted airdrops**  
+A music NFT project airdrops tokens to verified Spotify listeners. ZkTLS confirms listening history without the user ever revealing their account credentials.
+
+## Further Reading
+
+- [Crypto's AirTag Moment](https://www.nascent.xyz/idea/cryptos-airtag-moment) — Nascent
+- [Vitalik on ZkTLS use cases](https://x.com/VitalikButerin/status/1828727585204842867) — Twitter/X
+
+## Hackathon
+
+Built at [ETHGlobal Singapore 2024](https://ethglobal.com/showcase/zk-market-s6yp7) in 36 hours.  
+Won **Rootstock — Best Use of Rootstock Blockchain**.
 
 
-# Use Cases for Zk-Market:
-
-* **Mass Adoption through Web2 Partnerships**
-
-Zk-Market enables Web3 protocols to collaborate with major Web2 companies like JPMorgan or Facebook, creating innovative incentive structures. For example:
-Business Logic: Users with 500+ followers on Facebook receive a specific amount of tokens from a partnering Web3 protocol.
-Benefits:
-Web3: Expands ecosystem by onboarding Web2 users to their blockchain.
-Web2: Increases user retention as incentivized users are more likely to remain active on the platform.
-Outcome: A win-win situation fostering growth in both Web2 and Web3 ecosystems.
 
 
-* **Incentivizing Open-Source Contributors**
-
-Zk-Market can verify and reward open-source contributions across various projects:
-Process: Use ZKtls to securely verify a developer's contributions from their GitHub account.
-Incentive Structure: Reward contributors based on their verified open-source work.
-Benefits:
-Attracts more skilled developers to the protocol.
-Encourages ongoing contributions and community engagement.
-Builds a strong, motivated developer ecosystem around the protocol.
-
-
-
-
-* **Targeted Airdrops for Web2/web3 Communities**
-
-Utilize Zk-Market for precise, community-specific airdrops:
-Example: Airdrop tokens to the Spotify community for a music NFT project.
-Implementation: Use ZKtls to verify Spotify user data (e.g., listening history, playlist curation, verifying ceredential) without compromising privacy.
-Advantages:
-Targets users already interested in the relevant field (e.g., music enthusiasts for a music NFT).
-Creates a bridge between Web2 user bases and Web3 projects.
-Enhances the relevance and effectiveness of airdrops. 
-
-**Blogs**
-https://www.nascent.xyz/idea/cryptos-airtag-moment
-https://x.com/VitalikButerin/status/1828727585204842867?utm_source=tldrcrypto
